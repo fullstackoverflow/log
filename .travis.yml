@@ -1,21 +1,8 @@
-language: node_js
-node_js:
-- lts/*
-cache: npm
-script: echo "Node Version $(node -v) ..."
-notifications:
-  email:
-    on_success: always
-    on_failure: always
-
-jobs:
-  include:
-    - stage: npm release
-      node_js: "10"
-      deploy:
-        provider: npm
-        email: "yx136649111@qq.com"
-        api_key:
-          secure: PAQ+WByifIqIaa28YaXSCYDuUbLEXm7DLcyOaWubo9hNwClaMQkz3BQUbvPKoXm1/Uzt78ZiiFjrFx+oJTOCy/4nDwrgPng2CALhQDYAKX7Wd3rTwkfkmPH3HRAa9NCJNvzAOHU5LrOU4IwA+j4mGy/Q7K84xLiSfUw3AMjtwBzjCvUKLBH180D1CxtURap6uwAjqnEtOhPa8pb8aJQYq05dcW/K9HU8AOHhQT5TeBC8IsySjWrhMWSLlkOwKpem4yjHVmM1GFXQBgno2Xkp+k8Lex/Fd4082OAOTKpyyQag2isA5NJqGPf/nwzsZOjyuSrrcPkqNblxHeHM6ACk0PW3q8ztsXXhBCUalrX7xLSMeqMi2SlTrL4Zwj1pG7Bl+XHqV55hOmLqOr0cotz4lXzBbb7JjKVUD9rGVcWBXrrqHTs1DeX2kBJ6P1qEMLDoQc+kO8qY6LPuG1IGzfFtQQg5KUNeOsZEqOgubwTESagtdPMbi/cSxpHZ24/v1AZGNAM62KAerhemMHZz309HKh3KDUaAXKtK8w7rKlmFh9DXwNA5upkX9vrx5nzzKCC+og9JBxWqYpotOwCYBk8Qv023JNcGnK0sbQcHTcMwe4G7CAhS6MlepfgCrH3qstzcducPl9Eaklcj6Wv4WXxo8ZnA1LvbjcJl1lACHd6GuEk=
-      on:
-        branch: master
+deploy:
+  provider: npm
+  email: yx136649111@qq.com
+  api_key:
+    secure: oWsxpXcc/7VjgNssb+WEJp3pbIbWRLc9OwVefAM/kbb0DiuSogftkpaeQ76LmJCQ+gJiiW5IQ5EfuItBkCQc6Ziveq1Rm52VbWCv6GYf/jEfa9rsIp+VdfYfuOor6/tHKVi7ZmAiqLz3CuQCPAD9BpFlixO4AxdSBeW3gBoTBku8J7K4OmklsVuAufINLpqQ5HezIeKSH06cyKouohmhNjgXx0rPUsr7pCQhc2/VaiUPPf3+l1zWa5thbgKV37kUjdnKK6nDhZdcRBOTLqAJwhVJjB21UvTHaKZyZUKh2+etmWvEkUituIKG68MGQ47u6JmDAPxFoCAdGrLNDKgAhWsZWOklDn3Gc9yS1nm2WmaduEf/gQvLbG2LE7WPTcJpeMUKE+sQRfdnyulWc8U877iRG6imbWXRlnS+77tW7rcXkXYT1dgcz+bjmpJzwqIfdzmo85rdO3QQjJ9d+RHnYj7K38kQc2aA+rr96TjCNaf6StbgOjouYBM+3jM6I4sK9YKaxeA9m03d1ldVV/jKqvqh5tYE0TOZ09XY56bIM+nh6MlpTqgbmGjKwWZ66+pAc8TqWVGzU5m/WRScIH6bwOva/uymUVjD4TY2gK6IEjSxgLjXW+K2NkEPTafYwdnA8bKM7OvLOLfCeXsvxYhWEYsfIkosB+jLCu3mwDErzJQ=
+  on:
+    tags: true
+    repo: fullstackoverflow/log
