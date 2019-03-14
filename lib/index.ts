@@ -13,11 +13,10 @@ export class Logger {
 	Middleware() {
 		const namespace = this.NameSpace;
 		return async function(ctx: Koa.Context, next: Function) {
-			namespace.run(async () => {
-				const tid = uuid();
-				namespace.context.set("tid", tid);
-				await next();
-			});
+			namespace.init();
+			const tid = uuid();
+			namespace.context.set("tid", tid);
+			await next();
 		};
 	}
 

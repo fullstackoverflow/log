@@ -7,10 +7,9 @@ export class Namespace {
 		this.ContextManager = new Map();
 	}
 
-	run(fn: Function) {
+	init() {
 		const eid = asyncHooks.executionAsyncId();
 		this.ContextManager.set(eid, new Map());
-		fn();
 	}
 
 	get context() {
