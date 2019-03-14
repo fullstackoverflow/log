@@ -1,13 +1,12 @@
 {
   "name": "@tosee/log",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "jest --coverage --detectOpenHandles --forceExit",
     "start": "node test/index.js",
-    "version": "rm -rf ./dist/*&&tsc&&typedoc --out ./docs ./lib",
     "codecov": "codecov"
   },
   "repository": {

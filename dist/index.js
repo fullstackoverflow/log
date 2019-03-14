@@ -14,11 +14,10 @@ class Logger {
     Middleware() {
         const namespace = this.NameSpace;
         return async function (ctx, next) {
-            namespace.run(async () => {
-                const tid = uuid_1.v1();
-                namespace.context.set("tid", tid);
-                await next();
-            });
+            namespace.init();
+            const tid = uuid_1.v1();
+            namespace.context.set("tid", tid);
+            await next();
         };
     }
     info(...args) {

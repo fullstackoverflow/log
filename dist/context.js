@@ -8,10 +8,9 @@ class Namespace {
     constructor() {
         this.ContextManager = new Map();
     }
-    run(fn) {
+    init() {
         const eid = async_hooks_1.default.executionAsyncId();
         this.ContextManager.set(eid, new Map());
-        fn();
     }
     get context() {
         const eid = async_hooks_1.default.executionAsyncId();
