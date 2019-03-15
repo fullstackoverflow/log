@@ -16,6 +16,7 @@ class Logger {
         return async function (ctx, next) {
             namespace.init();
             const tid = uuid_1.v1();
+            ctx.response.set("X-Request-ID", tid);
             namespace.context.set("tid", tid);
             await next();
         };

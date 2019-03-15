@@ -6,7 +6,7 @@ import { createNamespace, getNamespace, Namespace } from "./context";
 
 export class Logger {
 	private NameSpace: Namespace;
-	constructor(namespace:string) {
+	constructor(namespace: string) {
 		this.NameSpace = createNamespace(namespace);
 	}
 
@@ -15,6 +15,7 @@ export class Logger {
 		return async function(ctx: Koa.Context, next: Function) {
 			namespace.init();
 			const tid = uuid();
+			ctx.response.set("X-Request-ID", tid);
 			namespace.context.set("tid", tid);
 			await next();
 		};
@@ -53,4 +54,3 @@ export class Logger {
 		}
 	}
 }
-
