@@ -16,11 +16,10 @@ class Logger {
         const namespace = this.NameSpace;
         const option = this.option;
         return async function (ctx, next) {
-            var _a;
             namespace.init();
             let tid = uuid_1.v1();
             if (option === null || option === void 0 ? void 0 : option.allowCover) {
-                tid = (_a = ctx.request.get("X-Request-ID")) !== null && _a !== void 0 ? _a : tid;
+                tid = ctx.request.get("X-Request-ID") || tid;
             }
             ctx.response.set("X-Request-ID", tid);
             namespace.context.set("tid", tid);
