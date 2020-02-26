@@ -4,17 +4,27 @@ import { v1 as uuid } from "uuid";
 import Koa from "koa";
 import { createNamespace, getNamespace, Namespace } from "./context";
 
+export type Option = {
+	allowCover: Boolean
+}
+
 export class Logger {
 	private NameSpace: Namespace;
-	constructor(namespace: string) {
+	private option: Option
+	constructor(namespace: string, option?: Option) {
 		this.NameSpace = createNamespace(namespace);
+		this.option = option;
 	}
 
 	Middleware() {
 		const namespace = this.NameSpace;
-		return async function(ctx: Koa.Context, next: Function) {
+		const option = this.option;
+		return async function (ctx: Koa.Context, next: Function) {
 			namespace.init();
-			const tid = uuid();
+			let tid = uuid();
+			if (option?.allowCover) {
+				tid = ctx.request.headers["X-Request-ID"] ?? tid;
+			}
 			ctx.response.set("X-Request-ID", tid);
 			namespace.context.set("tid", tid);
 			await next();
@@ -22,11 +32,12 @@ export class Logger {
 	}
 
 	info(...args) {
+		const now = moment();
 		if (!this.NameSpace.context) {
-			console.log(chalk.yellow(`[${moment().format("YYYY-MM-DD")}] [${moment().format("HH:mm:ss")}] `), ...args);
+			console.log(chalk.yellow(`[${now.format("YYYY-MM-DD")}] [${now.format("HH:mm:ss")}] `), ...args);
 		} else {
 			console.log(
-				chalk.yellow(`[${this.NameSpace.context.get("tid")}] [${moment().format("YYYY-MM-DD")}] [${moment().format("HH:mm:ss")}] `),
+				chalk.yellow(`[${this.NameSpace.context.get("tid")}] [${now.format("YYYY-MM-DD")}] [${now.format("HH:mm:ss")}] `),
 				...args
 			);
 		}
