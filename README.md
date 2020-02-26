@@ -5,16 +5,18 @@
 # 快速开始
 
 ```
-const app = new Koa();
-
+import { Logger } from "@tosee/log"
+import koa from 'koa';
 const logger = new Logger('my namespace');
+
+const app = new koa();
 
 app.use(logger.Middleware());
 
-app.use((ctx)=>{
-  logger.info("test");
-})
+app.use(async (ctx) => {
+    logger.info("test");
+});
 
-app.listen(3000)
+app.listen(3000);
 
 ```
