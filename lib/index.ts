@@ -23,7 +23,7 @@ export class Logger {
 			namespace.init();
 			let tid = uuid();
 			if (option?.allowCover) {
-				tid = ctx.request.headers["X-Request-ID"] ?? tid;
+				tid = ctx.request.get("X-Request-ID") ?? tid;
 			}
 			ctx.response.set("X-Request-ID", tid);
 			namespace.context.set("tid", tid);

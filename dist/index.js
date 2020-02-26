@@ -20,7 +20,7 @@ class Logger {
             namespace.init();
             let tid = uuid_1.v1();
             if (option === null || option === void 0 ? void 0 : option.allowCover) {
-                tid = (_a = ctx.request.headers["X-Request-ID"]) !== null && _a !== void 0 ? _a : tid;
+                tid = (_a = ctx.request.get("X-Request-ID")) !== null && _a !== void 0 ? _a : tid;
             }
             ctx.response.set("X-Request-ID", tid);
             namespace.context.set("tid", tid);
