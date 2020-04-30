@@ -16,16 +16,14 @@
   "author": "tosee",
   "license": "MIT",
   "devDependencies": {
-    "@types/koa": "^2.0.48",
-    "@types/node": "^11.11.0",
-    "@types/uuid": "^3.4.4",
-    "koa": "^2.7.0",
-    "typescript": "^3.8.2"
+    "@types/node": "^11.15.12",
+    "@types/uuid": "^3.4.9",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "chalk": "^2.4.2",
     "moment": "^2.24.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.4.0"
   },
   "publishConfig": {
     "access": "public"
