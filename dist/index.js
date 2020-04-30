@@ -8,13 +8,11 @@ const moment_1 = __importDefault(require("moment"));
 const uuid_1 = require("uuid");
 const context_1 = require("./context");
 class Logger {
-    constructor(namespace, option) {
+    constructor(namespace, format) {
         this.NameSpace = context_1.createNamespace(namespace);
-        this.option = option;
     }
-    Middleware() {
+    Middleware(option) {
         const namespace = this.NameSpace;
-        const option = this.option;
         return async function (ctx, next) {
             namespace.init();
             let tid = uuid_1.v1();
@@ -29,26 +27,26 @@ class Logger {
     info(...args) {
         const now = moment_1.default();
         if (!this.NameSpace.context) {
-            console.log(chalk_1.default.yellow(`[${now.format("YYYY-MM-DD")}] [${now.format("HH:mm:ss")}] `), ...args);
+            console.log(chalk_1.default.yellow(`[${now.format("YYYY-MM-DD")} ${now.format("HH:mm:ss")}] `), ...args);
         }
         else {
-            console.log(chalk_1.default.yellow(`[${this.NameSpace.context.get("tid")}] [${now.format("YYYY-MM-DD")}] [${now.format("HH:mm:ss")}] `), ...args);
+            console.log(chalk_1.default.yellow(`[${this.NameSpace.context.get("tid")} ${now.format("YYYY-MM-DD")}] [${now.format("HH:mm:ss")}] `), ...args);
         }
     }
     success(...args) {
         if (!this.NameSpace.context) {
-            console.log(chalk_1.default.green(`[${moment_1.default().format("YYYY-MM-DD")}] [${moment_1.default().format("HH:mm:ss")}] `), ...args);
+            console.log(chalk_1.default.green(`[${moment_1.default().format("YYYY-MM-DD")} ${moment_1.default().format("HH:mm:ss")}] `), ...args);
         }
         else {
-            console.log(chalk_1.default.green(`[${this.NameSpace.context.get("tid")}] [${moment_1.default().format("YYYY-MM-DD")}] [${moment_1.default().format("HH:mm:ss")}] `), ...args);
+            console.log(chalk_1.default.green(`[${this.NameSpace.context.get("tid")} ${moment_1.default().format("YYYY-MM-DD")}] [${moment_1.default().format("HH:mm:ss")}] `), ...args);
         }
     }
     error(...args) {
         if (!this.NameSpace.context) {
-            console.log(chalk_1.default.red(`[${moment_1.default().format("YYYY-MM-DD")}] [${moment_1.default().format("HH:mm:ss")}] `), ...args);
+            console.log(chalk_1.default.red(`[${moment_1.default().format("YYYY-MM-DD")} ${moment_1.default().format("HH:mm:ss")}] `), ...args);
         }
         else {
-            console.log(chalk_1.default.red(`[${this.NameSpace.context.get("tid")}] [${moment_1.default().format("YYYY-MM-DD")}] [${moment_1.default().format("HH:mm:ss")}] `), ...args);
+            console.log(chalk_1.default.red(`[${this.NameSpace.context.get("tid")} ${moment_1.default().format("YYYY-MM-DD")}] [${moment_1.default().format("HH:mm:ss")}] `), ...args);
         }
     }
 }
