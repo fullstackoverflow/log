@@ -64,7 +64,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		console.log(
+		return console.log(
 			chalk.yellow(str),
 			...args
 		);
@@ -76,7 +76,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		console.log(
+		return console.log(
 			chalk.green(str),
 			...args
 		);
@@ -88,7 +88,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		console.log(
+		return console.log(
 			chalk.red(str),
 			...args
 		);

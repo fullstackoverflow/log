@@ -1,4 +1,4 @@
-[![Build Status](https://www.travis-ci.org/fullstackoverflow/log.svg?branch=master)](https://www.travis-ci.org/fullstackoverflow/log.svg?branch=master)
+![CI](https://github.com/fullstackoverflow/log/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/fullstackoverflow/log/branch/master/graph/badge.svg)](https://codecov.io/gh/fullstackoverflow/log)
 [![NPM version](https://img.shields.io/npm/v/@tosee/log.svg)](https://www.npmjs.com/@tosee/log)
 

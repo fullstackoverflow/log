@@ -5,7 +5,9 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "jest --coverage --detectOpenHandles --forceExit",
+    "build": "tsc",
+    "coverage":"nyc --reporter=lcov --reporter=html npm run test && nyc report",
+    "test": "alsatian test/**/*.ts",
     "start": "node test/index.js",
     "codecov": "codecov"
   },
@@ -16,13 +18,17 @@
   "author": "tosee",
   "license": "MIT",
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/node": "^11.15.12",
     "@types/uuid": "^3.4.9",
+    "alsatian": "^3.2.1",
+    "nyc": "^15.0.1",
+    "source-map-support": "^0.5.19",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "chalk": "^2.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.25.3",
     "uuid": "^3.4.0"
   },
   "publishConfig": {
