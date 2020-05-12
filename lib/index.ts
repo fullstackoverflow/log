@@ -7,10 +7,41 @@ export type Option = {
 	allowCover: Boolean
 }
 
+export type Format = (...values: any) => string;
+
 export class Logger {
+	private format: {
+		withUID: Format
+		withoutUID: Format
+	};
 	private NameSpace: Namespace;
-	constructor(namespace: string, format?: string) {
+	constructor(namespace: string, format?: {
+		withUID: Format
+		withoutUID: Format
+	}) {
 		this.NameSpace = createNamespace(namespace);
+		this.format = {
+			withUID: format?.withUID ?? Logger.template`[${0} ${1} ${2}]`,
+			withoutUID: format?.withoutUID ?? Logger.template`[${0} ${1}]`,
+		};
+	}
+
+	static template(strings: TemplateStringsArray, ...keys: number[]): Format {
+		return (function (...values: any) {
+			var result = [strings[0]];
+			keys.forEach(function (key, i) {
+				var value = values[key];
+				result.push(value, strings[i + 1]);
+			});
+			return result.join('');
+		});
+	}
+
+	getUID() {
+		if (!this.NameSpace.context) {
+			return undefined;
+		}
+		return this.NameSpace.context.get("tid");
 	}
 
 	Middleware(option?: Option) {
@@ -29,35 +60,37 @@ export class Logger {
 
 	info(...args: any[]) {
 		const now = moment();
-		if (!this.NameSpace.context) {
-			console.log(chalk.yellow(`[${now.format("YYYY-MM-DD")} ${now.format("HH:mm:ss")}] `), ...args);
-		} else {
-			console.log(
-				chalk.yellow(`[${this.NameSpace.context.get("tid")} ${now.format("YYYY-MM-DD")}] [${now.format("HH:mm:ss")}] `),
-				...args
-			);
-		}
+		const day = now.format("YYYY-MM-DD");
+		const time = now.format("HH:mm:ss");
+		const uid = this.NameSpace.context?.get("tid");
+		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
+		console.log(
+			chalk.yellow(str),
+			...args
+		);
 	}
 
 	success(...args: any[]) {
-		if (!this.NameSpace.context) {
-			console.log(chalk.green(`[${moment().format("YYYY-MM-DD")} ${moment().format("HH:mm:ss")}] `), ...args);
-		} else {
-			console.log(
-				chalk.green(`[${this.NameSpace.context.get("tid")} ${moment().format("YYYY-MM-DD")}] [${moment().format("HH:mm:ss")}] `),
-				...args
-			);
-		}
+		const now = moment();
+		const day = now.format("YYYY-MM-DD");
+		const time = now.format("HH:mm:ss");
+		const uid = this.NameSpace.context?.get("tid");
+		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
+		console.log(
+			chalk.green(str),
+			...args
+		);
 	}
 
 	error(...args: any[]) {
-		if (!this.NameSpace.context) {
-			console.log(chalk.red(`[${moment().format("YYYY-MM-DD")} ${moment().format("HH:mm:ss")}] `), ...args);
-		} else {
-			console.log(
-				chalk.red(`[${this.NameSpace.context.get("tid")} ${moment().format("YYYY-MM-DD")}] [${moment().format("HH:mm:ss")}] `),
-				...args
-			);
-		}
+		const now = moment();
+		const day = now.format("YYYY-MM-DD");
+		const time = now.format("HH:mm:ss");
+		const uid = this.NameSpace.context?.get("tid");
+		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
+		console.log(
+			chalk.red(str),
+			...args
+		);
 	}
 }
