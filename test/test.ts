@@ -20,6 +20,7 @@ export class LoggerTest {
     @Timeout(10000)
     public async default() {
         const out = this.i1.info("test");
+        console.warn(out);
         const output = out[0].split("\u001b[33m[")[1].split("]\u001b[39m")[0];
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(output)).toEqual(true);
     }
