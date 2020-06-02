@@ -41,5 +41,57 @@ export class LoggerTest {
         Expect(f1).toEqual("|");
         Expect(f2).toEqual("|");
     }
+
+    @Test(`error output should work`)
+    @Timeout(10000)
+    public async error_default() {
+        const out = this.i1.error("test");
+        const output = ((out as any)[0]).split("");
+        const f1 = (output as any).shift();
+        const f2 = (output as any).pop();
+        Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(output.join(""))).toEqual(true);
+        Expect(out[1]).toEqual("test");
+        Expect(f1).toEqual("[");
+        Expect(f2).toEqual("]");
+    }
+
+    @Test(`custom error output should work`)
+    @Timeout(10000)
+    public async error_custom() {
+        const out = this.i2.error("test");
+        const output = ((out as any)[0]).split("");
+        const f1 = (output as any).shift();
+        const f2 = (output as any).pop();
+        Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(output.join(""))).toEqual(true);
+        Expect(out[1]).toEqual("test");
+        Expect(f1).toEqual("|");
+        Expect(f2).toEqual("|");
+    }
+
+    @Test(`success output should work`)
+    @Timeout(10000)
+    public async success_default() {
+        const out = this.i1.success("test");
+        const output = ((out as any)[0]).split("");
+        const f1 = (output as any).shift();
+        const f2 = (output as any).pop();
+        Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(output.join(""))).toEqual(true);
+        Expect(out[1]).toEqual("test");
+        Expect(f1).toEqual("[");
+        Expect(f2).toEqual("]");
+    }
+
+    @Test(`custom success output should work`)
+    @Timeout(10000)
+    public async success_custom() {
+        const out = this.i2.success("test");
+        const output = ((out as any)[0]).split("");
+        const f1 = (output as any).shift();
+        const f2 = (output as any).pop();
+        Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(output.join(""))).toEqual(true);
+        Expect(out[1]).toEqual("test");
+        Expect(f1).toEqual("|");
+        Expect(f2).toEqual("|");
+    }
 }
 
