@@ -9,7 +9,8 @@
     "coverage": "nyc --reporter=lcov --reporter=html npm run test && nyc report",
     "test": "alsatian test/**/*.ts",
     "start": "node test/index.js",
-    "codecov": "codecov"
+    "codecov": "codecov",
+    "doc": "typedoc --out ./docs ./lib&&touch docs/.nojekyll"
   },
   "repository": {
     "type": "git",
