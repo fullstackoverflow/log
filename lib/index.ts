@@ -44,6 +44,10 @@ export class Logger {
 		return this.NameSpace.context.get("tid");
 	}
 
+	setUID(uuid: string) {
+		return this.NameSpace.context.set("tid", uuid);
+	}
+
 	Middleware(option?: Option) {
 		const namespace = this.NameSpace;
 		return async function (ctx, next: Function) {
