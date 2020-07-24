@@ -45,7 +45,8 @@ export class Logger {
 	}
 
 	setUID(uuid: string) {
-		return this.NameSpace.context.set("tid", uuid);
+		this.NameSpace.init();
+		this.NameSpace.context.set("tid", uuid);
 	}
 
 	Middleware(option?: Option) {
