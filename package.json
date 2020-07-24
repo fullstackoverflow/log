@@ -1,6 +1,6 @@
 {
   "name": "@tosee/log",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "main": "./dist/lib/index.js",
   "types": "./dist/lib/index.d.ts",
