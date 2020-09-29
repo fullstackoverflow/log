@@ -9,21 +9,36 @@ export type Option = {
 
 export type Format = (...values: any) => string;
 
+export enum LOG_LEVEL {
+	ALL,
+	TRACE,
+	DEBUG,
+	INFO,
+	SUCCESS,
+	ERROR,
+	OFF
+}
+
 export class Logger {
 	private format: {
 		withUID: Format
 		withoutUID: Format
 	};
+
 	private NameSpace: Namespace;
+
+	level: LOG_LEVEL;
+
 	constructor(namespace: string, format?: {
 		withUID: Format
 		withoutUID: Format
-	}) {
+	}, level: LOG_LEVEL = LOG_LEVEL.ALL) {
 		this.NameSpace = createNamespace(namespace);
 		this.format = {
 			withUID: format?.withUID ?? Logger.template`[${0} ${1} ${2}]`,
 			withoutUID: format?.withoutUID ?? Logger.template`[${0} ${1}]`,
 		};
+		this.level = level;
 	}
 
 	static template(strings: TemplateStringsArray, ...keys: number[]): Format {
@@ -35,6 +50,10 @@ export class Logger {
 			});
 			return result.join('');
 		});
+	}
+
+	setLevel(level: LOG_LEVEL) {
+		this.level = level;
 	}
 
 	getUID() {
@@ -63,16 +82,39 @@ export class Logger {
 		};
 	}
 
+	private log(level: LOG_LEVEL, ...args: any[]) {
+		if (this.level < level) {
+			return console.log(
+				...args
+			);
+		}
+	}
+
+	trace(...args: any[]) {
+		const now = moment();
+		const day = now.format("YYYY-MM-DD");
+		const time = now.format("HH:mm:ss");
+		const uid = this.NameSpace.context?.get("tid");
+		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
+		return this.log(LOG_LEVEL.INFO, chalk.magenta(str), ...args);
+	}
+
+	debug(...args: any[]) {
+		const now = moment();
+		const day = now.format("YYYY-MM-DD");
+		const time = now.format("HH:mm:ss");
+		const uid = this.NameSpace.context?.get("tid");
+		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
+		return this.log(LOG_LEVEL.INFO, chalk.blue(str), ...args);
+	}
+
 	info(...args: any[]) {
 		const now = moment();
 		const day = now.format("YYYY-MM-DD");
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return console.log(
-			chalk.yellow(str),
-			...args
-		);
+		return this.log(LOG_LEVEL.INFO, chalk.yellow(str), ...args);
 	}
 
 	success(...args: any[]) {
@@ -81,10 +123,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return console.log(
-			chalk.green(str),
-			...args
-		);
+		return this.log(LOG_LEVEL.INFO, chalk.green(str), ...args);
 	}
 
 	error(...args: any[]) {
@@ -93,9 +132,6 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return console.log(
-			chalk.red(str),
-			...args
-		);
+		return this.log(LOG_LEVEL.INFO, chalk.red(str), ...args);
 	}
 }
