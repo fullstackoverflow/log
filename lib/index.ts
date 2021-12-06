@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import moment from "moment";
-import { v1 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 import { createNamespace, Namespace } from "./context";
 
 export type Option = {
