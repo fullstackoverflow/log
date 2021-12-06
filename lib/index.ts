@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import { magenta, blue, yellow, green, red } from "@tosee/color";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
 import { createNamespace, Namespace } from "./context";
@@ -96,7 +96,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, chalk.magenta(str), ...args);
+		return this.log(LOG_LEVEL.INFO, magenta`${str}`, ...args.map(arg => magenta`${arg}`));
 	}
 
 	debug(...args: any[]) {
@@ -105,7 +105,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, chalk.blue(str), ...args);
+		return this.log(LOG_LEVEL.INFO, blue`${str}`, ...args.map(arg => blue`${arg}`));
 	}
 
 	info(...args: any[]) {
@@ -114,7 +114,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, chalk.yellow(str), ...args);
+		return this.log(LOG_LEVEL.INFO, yellow`${str}`, ...args.map(arg => yellow`${arg}`));
 	}
 
 	success(...args: any[]) {
@@ -123,7 +123,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, chalk.green(str), ...args);
+		return this.log(LOG_LEVEL.INFO, green`${str}`, ...args.map(arg => green`${arg}`));
 	}
 
 	error(...args: any[]) {
@@ -132,6 +132,6 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, chalk.red(str), ...args);
+		return this.log(LOG_LEVEL.INFO, red`${str}`, ...args.map(arg => red`${arg}`));
 	}
 }
