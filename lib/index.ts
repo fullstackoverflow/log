@@ -96,7 +96,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, magenta`${str}`, ...args.map(arg => magenta`${arg}`));
+		return this.log(LOG_LEVEL.INFO, magenta`${str}`, ...args);
 	}
 
 	debug(...args: any[]) {
@@ -105,7 +105,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, blue`${str}`, ...args.map(arg => blue`${arg}`));
+		return this.log(LOG_LEVEL.INFO, blue`${str}`, ...args);
 	}
 
 	info(...args: any[]) {
@@ -114,7 +114,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, yellow`${str}`, ...args.map(arg => yellow`${arg}`));
+		return this.log(LOG_LEVEL.INFO, yellow`${str}`, ...args);
 	}
 
 	success(...args: any[]) {
@@ -123,7 +123,7 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, green`${str}`, ...args.map(arg => green`${arg}`));
+		return this.log(LOG_LEVEL.INFO, green`${str}`, ...args);
 	}
 
 	error(...args: any[]) {
@@ -132,6 +132,6 @@ export class Logger {
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
 		const str = this.NameSpace.context ? this.format.withUID(uid, day, time) : this.format.withoutUID(day, time);
-		return this.log(LOG_LEVEL.INFO, red`${str}`, ...args.map(arg => red`${arg}`));
+		return this.log(LOG_LEVEL.INFO, red`${str}`, ...args);
 	}
 }
