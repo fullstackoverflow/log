@@ -1,6 +1,6 @@
 import { magenta, blue, yellow, green, red } from "@tosee/color";
-import moment from "moment";
-import { v4 as uuid } from "uuid";
+import { randomUUID } from "crypto";
+import dayjs from "dayjs";
 import { createNamespace, Namespace } from "./context";
 
 export type Option = {
@@ -65,14 +65,14 @@ export class Logger {
 
 	setUID(uuid: string) {
 		this.NameSpace.init();
-		this.NameSpace.context.set("tid", uuid);
+		this.NameSpace.context.set("tid", randomUUID());
 	}
 
 	Middleware(option?: Option) {
 		const namespace = this.NameSpace;
 		return async function (ctx, next: Function) {
 			namespace.init();
-			let tid = uuid();
+			let tid = randomUUID();
 			if (option?.allowCover) {
 				tid = ctx.request.get("X-Request-ID") || tid;
 			}
@@ -91,7 +91,7 @@ export class Logger {
 	}
 
 	trace(...args: any[]) {
-		const now = moment();
+		const now = dayjs();
 		const day = now.format("YYYY-MM-DD");
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
@@ -100,7 +100,7 @@ export class Logger {
 	}
 
 	debug(...args: any[]) {
-		const now = moment();
+		const now = dayjs();
 		const day = now.format("YYYY-MM-DD");
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
@@ -109,7 +109,7 @@ export class Logger {
 	}
 
 	info(...args: any[]) {
-		const now = moment();
+		const now = dayjs();
 		const day = now.format("YYYY-MM-DD");
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
@@ -118,7 +118,7 @@ export class Logger {
 	}
 
 	success(...args: any[]) {
-		const now = moment();
+		const now = dayjs();
 		const day = now.format("YYYY-MM-DD");
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
@@ -127,7 +127,7 @@ export class Logger {
 	}
 
 	error(...args: any[]) {
-		const now = moment();
+		const now = dayjs();
 		const day = now.format("YYYY-MM-DD");
 		const time = now.format("HH:mm:ss");
 		const uid = this.NameSpace.context?.get("tid");
