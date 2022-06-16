@@ -29,7 +29,7 @@ export class LoggerTest {
         const flag_end = date.pop();
         const flag_start = date.shift();
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(date.join(""))).toEqual(true);
-        Expect(`${start}${text}${end}`).toEqual(out[1]);
+        Expect(`${text}`).toEqual(out[1]);
         Expect(flag_start).toEqual('[');
         Expect(flag_end).toEqual(']');
     }
@@ -45,7 +45,7 @@ export class LoggerTest {
         const flag_end = date.pop();
         const flag_start = date.shift();
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(date.join(""))).toEqual(true);
-        Expect(`${start}${text}${end}`).toEqual(out[1]);
+        Expect(`${text}`).toEqual(out[1]);
         Expect(flag_start).toEqual('|');
         Expect(flag_end).toEqual('|');
     }
@@ -61,7 +61,7 @@ export class LoggerTest {
         const flag_end = date.pop();
         const flag_start = date.shift();
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(date.join(""))).toEqual(true);
-        Expect(`${start}${text}${end}`).toEqual(out[1]);
+        Expect(`${text}`).toEqual(out[1]);
         Expect(flag_start).toEqual('[');
         Expect(flag_end).toEqual(']');
     }
@@ -77,7 +77,7 @@ export class LoggerTest {
         const flag_end = date.pop();
         const flag_start = date.shift();
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(date.join(""))).toEqual(true);
-        Expect(`${start}${text}${end}`).toEqual(out[1]);
+        Expect(`${text}`).toEqual(out[1]);
         Expect(flag_start).toEqual('|');
         Expect(flag_end).toEqual('|');
     }
@@ -93,7 +93,7 @@ export class LoggerTest {
         const flag_end = date.pop();
         const flag_start = date.shift();
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(date.join(""))).toEqual(true);
-        Expect(`${start}${text}${end}`).toEqual(out[1]);
+        Expect(`${text}`).toEqual(out[1]);
         Expect(flag_start).toEqual('[');
         Expect(flag_end).toEqual(']');
     }
@@ -109,7 +109,7 @@ export class LoggerTest {
         const flag_end = date.pop();
         const flag_start = date.shift();
         Expect(/^(\d{4})-(\d{2})-(\d{2})/.test(date.join(""))).toEqual(true);
-        Expect(`${start}${text}${end}`).toEqual(out[1]);
+        Expect(`${text}`).toEqual(out[1]);
         Expect(flag_start).toEqual('|');
         Expect(flag_end).toEqual('|');
     }
